@@ -5,15 +5,17 @@ import { bookRoutes } from "./app/controllers/book.controller";
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    origin: ['https://library-management-frontend-blond.vercel.app']
+}));
 app.use(express.json());
 
-app.use("/api/books",bookRoutes);
-app.use("/api/borrow",borrowRoutes);
+app.use("/books", bookRoutes);
+app.use("/borrow", borrowRoutes);
 
 
 app.get('/', (req: Request, res: Response) => {
-    res.send('Welcome to Note App');
+    res.send('Welcome to Library Management System App');
 });
 app.use((_req, res) => {
     res.status(404).json({ success: false, message: "Not Found", error: null });
